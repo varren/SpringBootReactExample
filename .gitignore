@@ -69,6 +69,5 @@ client_secrets.json
 .oauth-credentials/
 derby.log
 
-/src/main/resources/static/*
 PRIVATE_*
 
