@@ -1,11 +1,21 @@
 language: java
+sudo: false # because caching is not available for public repositories. https://stackoverflow.com/a/27365925/1032167
+
 jdk:
  - oraclejdk8
 env:
- - CI=false # because we usually have some warnings in react, so just ignore t hem for now
+ - CI=false # because we usually have some warnings in react, so just ignore them for now
 
 deploy:
   provider: heroku
   api-key:
-   secure: $HEROKU_API_KEY
+   secure: $HEROKU_API_KEY #  get key from heroku and add it to travis
   app: spring-boot-react-example
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
