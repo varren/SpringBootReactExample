@@ -54,8 +54,17 @@ node {
     nodeModulesDir = file("${project.projectDir}/frontend")
 }
 
-task webpack(type: YarnTask, dependsOn: npmInstall) {
-    args = ['build-spring-linux']
+task webpack(type: YarnTask, dependsOn: yarn) {
+    inputs.files(fileTree("${project.projectDir}/frontend/"))
+    outputs.dir("${project.projectDir}/src/main/resources/static/")
+
+    args = ['build']
 }
 
-processResources.dependsOn 'webpack'
+task moveJStoSpring(type: Copy) {
+    from "${project.projectDir}/frontend/build/"
+    into "${project.projectDir}/src/main/resources/static/"
+}
+
+moveJStoSpring.dependsOn 'webpack'
+processResources.dependsOn 'moveJStoSpring'
