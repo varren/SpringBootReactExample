@@ -5,7 +5,8 @@ How this React SpringBoot project works
 
 To start use`./gradlew bootRun`
 
-Be careful with `yarn build-spring-linux` because it will remove all files in spring boot `resources/static/` directory
+Be careful with `yarn build` because it will remove all files in spring boot `src/main/resources/static/` directory
+Can setup different path(in [gradle.build](https://github.com/varren/SpringBootReactExample/blob/master/build.gradle#L66) and [Config.java](https://github.com/varren/SpringBootReactExample/blob/master/src/main/java/ru/varren/Config.java#L43)) if you have some extra files you need to keep.
 
 
 
