@@ -1,3 +1,11 @@
 language: java
+jdk:
+ - oraclejdk8
 env:
- - CI=false
+ - CI=false # because we usually have some warnings in react, so just ignore t hem for now
+
+deploy:
+  provider: heroku
+  api-key:
+   secure: $HEROKU_API_KEY
+  app: spring-boot-react-example
