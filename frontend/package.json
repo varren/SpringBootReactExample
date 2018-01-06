@@ -10,7 +10,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build-spring-linux": "react-scripts build && OUT_DIR='../src/main/resources/static/' &&  rm -rf $OUT_DIR &&  mv build/ $OUT_DIR",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
