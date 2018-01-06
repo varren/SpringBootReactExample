@@ -1,3 +1,5 @@
+![travis-ci status](https://travis-ci.org/varren/SpringBootReactExample.svg?branch=master)
+
 How this React SpringBoot project works
 
 
