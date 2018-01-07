@@ -117,13 +117,13 @@ Implementation:
               nodeModulesDir = file("${project.projectDir}/frontend")
           }
 
-         // build react with webpack
-         task webpack(type: YarnTask, dependsOn: yarn) {
-             inputs.files(fileTree("${project.projectDir}/frontend/"))
-             outputs.dir("${project.projectDir}/src/main/resources/static/")
+          // build react with webpack
+          task webpack(type: YarnTask, dependsOn: yarn) {
+              inputs.files(fileTree("${project.projectDir}/frontend/"))
+              outputs.dir("${project.projectDir}/src/main/resources/static/")
 
-             args = ['build']
-         }
+              args = ['build']
+          }
 
           // copy react build to spring resourses
           task moveJStoSpring(type: Copy) {
