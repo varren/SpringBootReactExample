@@ -38,10 +38,7 @@ Implementation:
          
         create-react-app frontend
         cd frontend/
-    1. Add `"build-spring-linux": "react-scripts build && OUT_DIR='../src/main/resources/static/' &&  rm -rf $OUT_DIR &&  mv build/ $OUT_DIR",`
-    to your package.json. 
-       `OUT_DIR` is directory in spring project you want to use to store react files
-    2. Comment out `registerServiceWorker();` in `src/index.js` for now.
+    1. Comment out `registerServiceWorker();` in `src/index.js` for now.
     
  3. Setup spring configuration
   
@@ -119,10 +116,22 @@ Implementation:
               // Set the work directory where node_modules should be located
               nodeModulesDir = file("${project.projectDir}/frontend")
           }
-            
-          task webpack(type: YarnTask, dependsOn: npmInstall) {
-              args = ['build-spring-linux']
+
+         // build react with webpack
+         task webpack(type: YarnTask, dependsOn: yarn) {
+             inputs.files(fileTree("${project.projectDir}/frontend/"))
+             outputs.dir("${project.projectDir}/src/main/resources/static/")
+
+             args = ['build']
+         }
+
+          // copy react build to spring resourses
+          task moveJStoSpring(type: Copy) {
+              from "${project.projectDir}/frontend/build/"
+              into "${project.projectDir}/src/main/resources/static/"
           }
-          
-          processResources.dependsOn 'webpack'
+
+          moveJStoSpring.dependsOn 'webpack'
+          processResources.dependsOn 'moveJStoSpring'
+
       Can comment out  `processResources.dependsOn 'webpack'` or implement some debug/production logic if you don't want gradle to recompile javascipt on each spring boot start
